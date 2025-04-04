@@ -10,10 +10,12 @@
 #include <libgen.h>
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
+#include <X11/Xutil.h>
 #include <X11/cursorfont.h>
 #include <X11/keysym.h>
 #include <X11/Xft/Xft.h>
 #include <X11/XKBlib.h>
+#include <X11/Xresource.h>
 
 char *argv0;
 #include "arg.h"
@@ -1171,10 +1173,18 @@ xinit(int cols, int rows)
 	root = XRootWindow(xw.dpy, xw.scr);
 	if (!(opt_embed && (parent = strtol(opt_embed, NULL, 0))))
 		parent = root;
-	xw.win = XCreateWindow(xw.dpy, root, xw.l, xw.t,
+	xw.win = XCreateWindow(xw.dpy, parent, xw.l, xw.t,
 			win.w, win.h, 0, XDefaultDepth(xw.dpy, xw.scr), InputOutput,
 			xw.vis, CWBackPixel | CWBorderPixel | CWBitGravity
 			| CWEventMask | CWColormap, &xw.attrs);
+
+	/* Set window background opacity */
+	if (alpha < 1.0) {
+		unsigned int opacity = (unsigned int)(0xffffffff * alpha);
+		XChangeProperty(xw.dpy, xw.win, XInternAtom(xw.dpy, "_NET_WM_WINDOW_OPACITY", False),
+			XA_CARDINAL, 32, PropModeReplace, (unsigned char*)&opacity, 1L);
+	}
+	
 	if (parent != root)
 		XReparentWindow(xw.dpy, xw.win, parent, xw.l, xw.t);
 
