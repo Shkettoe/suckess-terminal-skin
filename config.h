@@ -139,8 +139,8 @@ static const char *colorname[] = {
 	/* more colors can be added after 255 to use with DefaultXX */
 	"#01f3c9",
 	"#555555",
-	"#748cab", 
-	"#111728", 
+	"#7467ab",
+	"#221728",
 };
 
 
@@ -166,8 +166,8 @@ static unsigned int cursorshape = 6;
  * Default columns and rows numbers
  */
 
-static unsigned int cols = 80;
-static unsigned int rows = 24;
+static unsigned int cols = 90;
+static unsigned int rows = 34;
 
 /*
  * Default colour and shape of the mouse cursor
