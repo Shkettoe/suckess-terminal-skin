@@ -65,7 +65,7 @@ static unsigned int blinktimeout = 800;
 /*
  * thickness of underline and bar cursors
  */
-static unsigned int cursorthickness = 2;
+static unsigned int cursorthickness = 4;
 
 /*
  * bell volume. It must be a value between -100 and 100. Use 0 for disabling
@@ -74,7 +74,7 @@ static unsigned int cursorthickness = 2;
 static int bellvolume = 0;
 
 /* default TERM value */
-char *termname = "st-256color";
+char *termname = "Konzola";
 
 /*
  * spaces per tab
@@ -205,6 +205,7 @@ static MouseShortcut mshortcuts[] = {
 /* Internal keyboard shortcuts. */
 #define MODKEY Mod1Mask
 #define TERMMOD (ControlMask|ShiftMask)
+#define MAJMOD (ShiftMask|Mod1Mask)
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
@@ -220,6 +221,10 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
+	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = 1} },
+	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = 1} },
+	{ MAJMOD,               XK_Page_Up,     kscrollup,      {.i = -1} },
+	{ MAJMOD,               XK_Page_Down,   kscrolldown,    {.i = -1} },
 };
 
 /*
