@@ -52,7 +52,6 @@ After this, if you have been making changes you can run the terminal to check th
 
 And finally, installing the terminal:
 
-````
+```
     sudo make install
 ```
-````
