@@ -47,7 +47,7 @@ Installation:
 After this, if you have been making changes you can run the terminal to check their effect.
 
 ```
-    st
+    ./st
 ```
 
 And finally, installing the terminal:
